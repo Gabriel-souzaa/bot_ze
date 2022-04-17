@@ -11,7 +11,7 @@ yarn
 ## Usage
 
 ```sh
-yarn start
+yarn dev
 ```
 
 ## Author
