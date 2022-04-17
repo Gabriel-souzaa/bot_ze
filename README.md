@@ -1,4 +1,12 @@
-<h1 align="center">Welcome Bot Zé 👋</h1>
+<div align="center">
+	 <img alt="Zé" align="center" src="./public/img/ze.png" width="140px">
+</div>
+
+<div align="center">
+  <h3>
+    Bot Zé 👋
+  </h3>
+</div>
 
 > Bot para tirar onda no Discord
 

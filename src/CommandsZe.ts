@@ -1,4 +1,5 @@
 import { Message, MessageMentions, VoiceChannel } from "discord.js";
+import { MusicBot } from "./MusicBot";
 
 class CommandsZe {
   private data: Message;
@@ -11,19 +12,34 @@ class CommandsZe {
     this.mentions = botData.mentions;
   }
 
-  leave() {
+  async leave() {
     this.voiceChannel.leave();
   }
 
-  join() {
+  async join() {
     this.voiceChannel.join();
   }
 
-  music() {
+  async music(content: string) {
+    if (!this.voiceChannel)
+      return this.data.channel.send(
+        "Você precisa estar em um canal de voz para tocar música!!"
+      );
 
+    const permissions = this.voiceChannel.permissionsFor(this.data.client.user);
+
+    if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+      return this.data.channel.send(
+        "Preciso das permissões para participar e falar no seu canal de voz!"
+      );
+    }
+
+    const musics = new MusicBot(this.data);
+
+    await musics.execute(content, this.data.guild.id, this.voiceChannel);
   }
 
-  mentionZe() {
+  async mentionZe() {
     if ((this.mentions.users.first().id === '330491894393995264') || (this.mentions.users.first().id === '525471845298733057')) {
       this.data.delete();
       this.data.reply(`Vai catar coquinho ${this.data.author.username}!!`);
